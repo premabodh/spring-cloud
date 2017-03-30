@@ -1,0 +1,15 @@
+server:
+  port: 0
+
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    
+#    availabilityZones:
+#      default: ${APPLICATION_DOMAIN:${DOMAIN:defaultZone}}
+
+#stores:
+#  ribbon:
+#    ServerListRefreshInterval: 1000
+
+security.oauth2.resource.userInfoUri: http://localhost:9999/uaa/user

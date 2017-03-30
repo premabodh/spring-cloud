@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: vikash
+    
+    
+server:
+  port: 0
+
+#eureka:
+#  instance:
+ #   leaseRenewalIntervalInSeconds: 10
+  #  metadataMap:
+   #   instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${random.value}}}
+  #client:
+  #  registryFetchIntervalSeconds: 5
+    
+    
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    registryFetchIntervalSeconds: 5
+
+zuul:
+  ribbon-isolation-strategy: SEMAPHORE
+  
+  strip-prefix: true
+  retryable: true
+    

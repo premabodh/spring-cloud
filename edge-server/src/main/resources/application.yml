@@ -1,0 +1,68 @@
+info:
+  component: Zuul Server
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+
+security.oauth2.resource.userInfoUri: http://localhost:9999/uaa/user
+
+
+
+security:
+  ignored:
+  - /vikash/**
+    
+
+zuul:
+  ignoredServices: "*"
+  routes:
+    productcomposite:
+      path: /productcomposite/**
+    vikash:
+      path: /vikash/**
+  ribbon-isolation-strategy: SEMAPHORE 
+  
+eureka:
+  client:
+    eureka-server-connect-timeout-seconds: 500
+    eureka-server-read-timeout-seconds: 500
+  instance:
+    non-secure-port-enabled: false
+    secure-port-enabled: false
+    secure-port: ${server.port}  
+    prefer-ip-address: true
+
+server:
+  port: 8765
+  connection-timeout: 500
+  session:
+    timeout: 500
+#  ssl:
+#    enabled: true
+#    key-store: classpath:keystore1.jks
+#    key-store-password: password
+#    key-alias: replserver1
+#    key-store-type: JKS
+#    trust-store-password: password
+#    trust-store: classpath:truststore.ts
+    
+
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: INFO
+    
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
